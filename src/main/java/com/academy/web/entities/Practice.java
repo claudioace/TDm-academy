@@ -20,8 +20,8 @@ public class Practice {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    private Student student;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
     
     @Column(name = "date_start", nullable = false)
     private LocalDate dateStart;
@@ -40,12 +40,12 @@ public class Practice {
         this.id = id;
     }
 
-    public Student getStudent() {
-        return student;
+    public User getUser() {
+        return user;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public LocalDate getDateStart() {
