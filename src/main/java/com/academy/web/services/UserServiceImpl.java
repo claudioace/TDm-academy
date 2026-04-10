@@ -1,48 +1,103 @@
+package com.academy.web.services;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.academy.web.dtos.UserDTO;
+import com.academy.web.entities.User;
 import com.academy.web.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
+    
     public UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
     }
     @Override
     public List<UserDTO> findUsers(String value) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findUsers'");
+        List<User> users;
+
+        if (value != null && !value.isEmpty()) {
+            users = this.repository.findByFirstNameContaining(value);
+        } else {
+            users = this.repository.findAll();
+        }
+
+        return users.stream()
+                .map(u -> new UserDTO(
+                    u.getId(),
+                    u.getDni(),
+                    u.getFirstName(),
+                    u.getLastName(),
+                    u.getEmail())
+                )
+                .collect(Collectors.toList());
     }
+    
     @Override
-    public void saveUser(UserDTO user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveUser'");
+    public void saveUser(UserDTO userDto) {
+        User user = new User();
+
+        if (userDto.getId() != null) {
+            user.setId(userDto.getId());
+        }
+        user.setDni(userDto.getDni());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+
+        this.repository.save(user);
     }
+    
     @Override
     public UserDTO getUserById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserById'");
+        User user = this.repository.findById(id).orElse(null);
+        if (user == null) {
+            return null; 
+        }
+        return new UserDTO(
+            user.getId(),
+            user.getDni(),
+            user.getFirstName(),
+            user.getLastName(),
+            user.getEmail()
+        );
     }
     @Override
     public void deleteUser(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+        this.repository.deleteById(id);
     }
     @Override
-    public void register(UserDTO user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'register'");
+    public void register(UserDTO userDto) {
+        User user = new User();
+
+        user.setDni(userDto.getDni());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRole("STUDENT"); // posibles valoes: "STUDENT" | "ADMIN"
+
+        this.repository.save(user);
     }
+
     @Override
     public UserDTO findbyEmail(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findbyEmail'");
+        Optional<User> userOptional = this.repository.findByEmail(email);
+        User user = userOptional.orElseThrow();
+        UserDTO dto = new UserDTO(
+                                user.getId(),
+                                user.getDni(),
+                                user.getFirstName(),
+                                user.getLastName(),
+                                user.getEmail());
+        return dto;
     }
 
 }
