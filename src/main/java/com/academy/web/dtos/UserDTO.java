@@ -8,17 +8,27 @@ public class UserDTO {
     private String email;
     private String firstName;
     private String lastName;
+    private String role;
     @JsonIgnore
     private String password;
-    public UserDTO(Long id, String dni, String email, String firstName, String lastName) {
+    public UserDTO(){}
+    public UserDTO(Long id, String dni, String email, String firstName, String lastName, String role) {
         this.id = id;
         this.dni = dni;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
     }
-    public UserDTO() {
+
+    public String getRole() {
+        return role;
     }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Long getId() {
         return id;
     }

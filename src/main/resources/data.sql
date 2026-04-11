@@ -14,5 +14,5 @@ CREATE TABLE IF NOT EXISTS users (
 INSERT INTO users (dni, email, first_name, last_name, password, role) 
 VALUES ('00000000', 'admin@academy.com', 'Admin', 'Admin', 
         '$2a$12$21ksFRPXYUEUvPEAdfeoQeTI8kOfY9w8o3SW.j0OPMTLgWn2au/5a', 
-        'ADMIN')
+        'ADMIN')         
 ON DUPLICATE KEY UPDATE email = email;

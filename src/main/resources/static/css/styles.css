@@ -1,0 +1,10 @@
+*{
+    background-color: whitesmoke;
+}
+.border-gray>*, th, td{
+    margin: 0;
+    padding: 3px;
+    border: 1px solid gray;
+    color: darkgrey;
+
+}

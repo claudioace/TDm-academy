@@ -35,7 +35,8 @@ public class UserServiceImpl implements UserService {
                     u.getDni(),
                     u.getFirstName(),
                     u.getLastName(),
-                    u.getEmail())
+                    u.getEmail(),
+                    u.getRole())
                 )
                 .collect(Collectors.toList());
     }
@@ -51,6 +52,7 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
+        user.setRole(userDto.getRole());
 
         this.repository.save(user);
     }
@@ -66,7 +68,8 @@ public class UserServiceImpl implements UserService {
             user.getDni(),
             user.getFirstName(),
             user.getLastName(),
-            user.getEmail()
+            user.getEmail(),
+            user.getRole()
         );
     }
     @Override
@@ -96,7 +99,8 @@ public class UserServiceImpl implements UserService {
                                 user.getDni(),
                                 user.getFirstName(),
                                 user.getLastName(),
-                                user.getEmail());
+                                user.getEmail(),
+                                user.getRole());
         return dto;
     }
 
