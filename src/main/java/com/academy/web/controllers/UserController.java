@@ -30,8 +30,6 @@ public class UserController {
         List<UserDTO> dtos = this.service.findUsers(filtro);
         model.addAttribute("users", dtos);
         model.addAttribute("filtro", filtro);
-        
-
         return "users";
     
 

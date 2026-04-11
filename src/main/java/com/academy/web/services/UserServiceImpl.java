@@ -33,9 +33,9 @@ public class UserServiceImpl implements UserService {
                 .map(u -> new UserDTO(
                     u.getId(),
                     u.getDni(),
+                    u.getEmail(),
                     u.getFirstName(),
                     u.getLastName(),
-                    u.getEmail(),
                     u.getRole())
                 )
                 .collect(Collectors.toList());
@@ -46,14 +46,18 @@ public class UserServiceImpl implements UserService {
         User user = new User();
 
         if (userDto.getId() != null) {
+            user = this.repository.findById(userDto.getId()).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
             user.setId(userDto.getId());
+        } else {
+            user = new User();
         }
+
         user.setDni(userDto.getDni());
+        user.setEmail(userDto.getEmail());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
-        user.setEmail(userDto.getEmail());
         user.setRole(userDto.getRole());
-
+        
         this.repository.save(user);
     }
     
@@ -66,9 +70,9 @@ public class UserServiceImpl implements UserService {
         return new UserDTO(
             user.getId(),
             user.getDni(),
+            user.getEmail(),
             user.getFirstName(),
             user.getLastName(),
-            user.getEmail(),
             user.getRole()
         );
     }
@@ -81,9 +85,9 @@ public class UserServiceImpl implements UserService {
         User user = new User();
 
         user.setDni(userDto.getDni());
+        user.setEmail(userDto.getEmail());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
-        user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRole("STUDENT"); // posibles valoes: "STUDENT" | "ADMIN"
 
@@ -97,9 +101,9 @@ public class UserServiceImpl implements UserService {
         UserDTO dto = new UserDTO(
                                 user.getId(),
                                 user.getDni(),
+                                user.getEmail(),
                                 user.getFirstName(),
                                 user.getLastName(),
-                                user.getEmail(),
                                 user.getRole());
         return dto;
     }

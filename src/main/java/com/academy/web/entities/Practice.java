@@ -20,13 +20,11 @@ public class Practice {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
-    
     @Column(name = "date_start", nullable = false)
     private LocalDate dateStart;
-    
-    @Column(name = "date_end", nullable = true)
+    @Column(name = "date_end")
     private LocalDate dateEnd;
 
     public Practice() {

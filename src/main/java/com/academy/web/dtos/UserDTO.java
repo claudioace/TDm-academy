@@ -11,6 +11,7 @@ public class UserDTO {
     private String role;
     @JsonIgnore
     private String password;
+    
     public UserDTO(){}
     public UserDTO(Long id, String dni, String email, String firstName, String lastName, String role) {
         this.id = id;

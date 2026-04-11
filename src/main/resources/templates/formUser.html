@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear Nuevo Usuario</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Editar datos de usuario</h1>
+    
+
+    <form th:action="@{/users/save}" th:object="${user}" method="post">
+        <input type="hidden" th:field="*{id}" class="input-text"/>
+        <p>
+            <label for="dni">Identificacion</label>
+            <input type="text" th:field="*{dni}" />
+        </p>
+        <p>
+            <label for="firstName">Nombre</label>
+            <input type="text" th:field="*{firstName}" class="input-text"/>
+        </p>
+        <p>
+            <label for="lastName">Apellido</label>
+            <input type="text" th:field="*{lastName}" class="input-text"/>
+        </p>
+        <p>
+            <label for="email">Email</label>
+            <input type="text" th:field="*{email}" class="input-text"/>
+        </p>
+        <p>
+            <label for="role">Rol del usuario:</label>
+            <select id="role" name="role" required class="input-text">
+                <option value="STUDENT">Estudiante</option>
+                <option value="ADMIN">Administrador</option>
+            </select>
+        </p>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+
+</html>

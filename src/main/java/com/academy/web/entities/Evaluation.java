@@ -20,16 +20,14 @@ public class Evaluation {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", nullable = false)
+    @JoinColumn(name = "course_id")
     private Course course;
-
     @Column(name = "grade", nullable = false)
     private Double grade; 
-
     @Column(name = "date", nullable = false)
     private LocalDate date;
 

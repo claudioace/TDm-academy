@@ -1,10 +1,52 @@
 *{
     background-color: whitesmoke;
-}
-.border-gray>*, th, td{
-    margin: 0;
-    padding: 3px;
-    border: 1px solid gray;
-    color: darkgrey;
+    font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
 
+}
+
+.border-gray {
+    border-collapse: collapse;
+    color:  darkgray;
+    
+}
+
+.border-gray th,
+.border-gray td {
+    border: 1px solid #d1d5db;
+    padding: 6px; 
+    text-align: left;
+}
+
+.border-gray th {
+    background-color: #f3f4f6;
+    text-transform: uppercase;
+}
+
+.input-text{
+    margin: 6px;
+    height: 1.5rem;
+    font-size: 1.2rem;
+    padding-left: 5px;
+    border-radius: 8px;
+}
+
+.table-grid {
+    border-collapse: collapse;
+    min-width: 80%;
+    
+}
+
+.table-grid th,
+.table-grid td {
+    border: 1px solid #d1d5db;
+    padding: 5px 5px;
+    text-align: left;
+}
+
+.table-grid th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+    color: #374151;
+    text-transform: uppercase;
 }
