@@ -20,20 +20,25 @@
         <input type="hidden" th:field="*{id}" class="input-text"/>
         <p>
             <label for="dni">Identificacion</label>
-            <input type="text" th:field="*{dni}" />
+            <input type="text" th:field="*{dni}" class="input-text" required/>
         </p>
         <p>
             <label for="firstName">Nombre</label>
-            <input type="text" th:field="*{firstName}" class="input-text"/>
+            <input type="text" th:field="*{firstName}" class="input-text" required/>
         </p>
         <p>
             <label for="lastName">Apellido</label>
-            <input type="text" th:field="*{lastName}" class="input-text"/>
+            <input type="text" th:field="*{lastName}" class="input-text" required/>
         </p>
         <p>
             <label for="email">Email</label>
-            <input type="text" th:field="*{email}" class="input-text"/>
+            <input type="text" th:field="*{email}" class="input-text" required/>
         </p>
+        <p th:if="${passNew}">
+            <label for="password">Password</label>
+            <input type="text" th:field="*{password}" class="input-text" required/>
+            <small>Por defecto: password</small>
+        </p>        
         <p>
             <label for="role">Rol del usuario:</label>
             <select id="role" name="role" required class="input-text">
@@ -41,6 +46,7 @@
                 <option value="ADMIN">Administrador</option>
             </select>
         </p>
+
         <button type="submit">Guardar</button>
     </form>
 </body>

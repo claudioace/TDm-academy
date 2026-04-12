@@ -2,6 +2,7 @@ package com.academy.web.controllers;
 
 import java.util.List;
 
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,10 @@ public class UserController {
     
     @GetMapping("/new")
     public String getNewUser(Model model){
-        model.addAttribute("user", new UserDTO());
+        UserDTO dto = new UserDTO();
+        dto.setPassword("password");
+        model.addAttribute("user", dto);
+        model.addAttribute("passNew", true);
         return "formUser";
     }
     @PostMapping("/save")
