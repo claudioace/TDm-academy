@@ -5,10 +5,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.academy.web.dtos.UserDTO;
 import com.academy.web.entities.User;
 import com.academy.web.repositories.UserRepository;
+
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,7 +27,7 @@ public class UserServiceImpl implements UserService {
         List<User> users;
 
         if (value != null && !value.isEmpty()) {
-            users = this.repository.findByFirstNameContaining(value);
+            users = this.repository.findByFirstNameContainingOrLastNameContainingOrEmailContaining(value, value, value);
         } else {
             users = this.repository.findAll();
         }
@@ -42,6 +45,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
+    @Transactional
     public void saveUser(UserDTO userDto) {
         User user = new User();
 

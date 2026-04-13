@@ -45,10 +45,17 @@ public class UserController {
         return "formUser";
     }
     @PostMapping("/save")
-    public String setUser(@ModelAttribute UserDTO user){
+    public String setUser(@ModelAttribute UserDTO user, Model model){
+        
+    try {
         this.service.saveUser(user);
-
         return "redirect:/users";
+    } catch (Exception e) {
+        model.addAttribute("user", user);
+        model.addAttribute("passNew", true);
+        model.addAttribute("errorMessage", "Identificación o email ya existe");
+        return "formUser";
+    }
     }
 
     @GetMapping("/edit/{id}")

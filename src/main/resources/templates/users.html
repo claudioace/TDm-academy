@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <h1>User List</h1>
+    <h1>Lista de todos los usuarios</h1>
     <form action="/users" method="get">
-        <input type="text" name="filtro" th:value="${filtro}" />
+        <input type="text" name="filtro" th:value="${filtro}" placeholder="Nombre, apellido o email" class="input-text"/>
         <button type="submit">Buscar</button>
     </form>
     <a th:href="@{/users/new}">Nuevo usuario</a>
