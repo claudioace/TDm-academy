@@ -2,6 +2,9 @@ package com.academy.web.entities;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,10 +24,12 @@ public class UserCourse {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Course course;
     @Column(name = "date", nullable = false)
     private LocalDate date;

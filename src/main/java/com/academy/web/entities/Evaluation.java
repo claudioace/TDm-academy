@@ -2,6 +2,9 @@ package com.academy.web.entities;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,60 +23,17 @@ public class Evaluation {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
+    @JoinColumn(name = "user_course_id", nullable =false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UserCourse userCourseId;
+    
     @Column(name = "grade", nullable = false)
     private Double grade; 
+    
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
     public Evaluation() {
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public Double getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Double grade) {
-        this.grade = grade;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    
 
 }

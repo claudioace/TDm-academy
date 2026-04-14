@@ -1,0 +1,49 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<div th:replace="~{fragments/navbar :: ${session.isAdmin} ? 'navbar-admin' : 'navbar-student'}"></div>
+
+    <h1>Usuarios por curso</h1>
+    <form th:action="@{/courses/students/{id}(id=${courseId})}" method="get">
+        <input type="text" name="filtro" th:value="${filtro}" placeholder="Dni, nombre, apellido" class="input-text"/>
+        <button type="submit">Buscar</button>
+    </form>
+    <a th:href="@{/users/new}">Nuevo usuario</a>
+    <table class="table-grid">
+        <thead>
+            <tr>
+                <th>Dni</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha Incripcion</th>
+                <th>Promedio de notas</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.dni}"></td>
+                <td th:text="${student.firstName}"></td>
+                <td th:text="${student.lastName}"></td>
+                <td th:text="${student.date}"></td>
+                <td th:text="${student.avgGrade}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

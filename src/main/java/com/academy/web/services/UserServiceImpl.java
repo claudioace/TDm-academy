@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         List<User> users;
 
         if (value != null && !value.isEmpty()) {
-            users = this.repository.findByFirstNameContainingOrLastNameContainingOrEmailContaining(value, value, value);
+            users = this.repository.findByDniContainingOrFirstNameContainingOrLastNameContainingOrEmailContaining(value, value, value, value);
         } else {
             users = this.repository.findAll();
         }
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
         user.setLastName(userDto.getLastName());
         user.setRole(userDto.getRole());
         if (userDto.getPassword() != null) {
-            user.setPassword(userDto.getPassword());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         }
 
 

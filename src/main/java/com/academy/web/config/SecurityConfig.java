@@ -31,6 +31,7 @@ public class SecurityConfig {
             .requestMatchers("/api/**").permitAll()
             .requestMatchers("/courses/**").hasAnyRole("STUDENT", "ADMIN")
             .requestMatchers("/users/**").hasRole("ADMIN")
+            .requestMatchers("/myCourses/**").hasAnyRole("STUDENT", "ADMIN")
             .anyRequest().authenticated())
             .formLogin(form -> form
                 .loginPage("/login")
@@ -38,14 +39,19 @@ public class SecurityConfig {
                     String role = authentication.getAuthorities().iterator().next().getAuthority();
                     
                     if (role.equals("ROLE_ADMIN")) {
+                        request.getSession().setAttribute("isAdmin", true);
                         response.sendRedirect("/users");
                     } else {
-                        response.sendRedirect("/courses");
+                        request.getSession().setAttribute("isAdmin", false);
+                        response.sendRedirect("/myCourses");
                     }
                 })
                 .permitAll())
-            .logout(logout -> logout
-                .logoutSuccessUrl("/logout?logout")
+                .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
                 .permitAll());
 
         return http.build();

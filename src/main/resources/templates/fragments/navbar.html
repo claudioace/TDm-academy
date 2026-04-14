@@ -1,0 +1,33 @@
+<div th:fragment="navbar-admin">
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">Academy Administrador</a>
+        
+        <div class="navbar-menu">
+            <a href="/users" class="navbar-link">Gestionar usuarios</a>
+            <a href="/courses" class="navbar-link">Gestionar asignaturas</a>
+        </div>
+        
+        <div class="navbar-user">
+            <a href="/logout" class="navbar-link navbar-logout">
+                <i class="fas fa-sign-out-alt"></i> Salir
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div th:fragment="navbar-student">
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">Academy Estudiante</a>
+        
+        <div class="navbar-menu">
+            <a href="/myUser" class="navbar-link">Ver Perfil</a>
+            <a href="/myCourses" class="navbar-link">Gestionar mis asignaturas</a>
+        </div>
+        
+        <div class="navbar-user">
+            <a href="/logout" class="navbar-link navbar-logout">
+                <i class="fas fa-sign-out-alt"></i> Salir
+            </a>
+        </div>
+    </nav>
+</div>
