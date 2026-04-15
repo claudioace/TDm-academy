@@ -29,9 +29,9 @@ public class SecurityConfig {
             //si quiero que solo sea un unico rol con acceso:
             //  .requestMatchers("/users/**").hasRole("ADMIN")
             .requestMatchers("/api/**").permitAll()
-            .requestMatchers("/courses/**").hasAnyRole("STUDENT", "ADMIN")
+            .requestMatchers("/courses/myCourses/**").hasAnyRole("STUDENT", "ADMIN")
+            .requestMatchers("/courses/**").hasRole("ADMIN")
             .requestMatchers("/users/**").hasRole("ADMIN")
-            .requestMatchers("/myCourses/**").hasAnyRole("STUDENT", "ADMIN")
             .anyRequest().authenticated())
             .formLogin(form -> form
                 .loginPage("/login")
@@ -43,7 +43,7 @@ public class SecurityConfig {
                         response.sendRedirect("/users");
                     } else {
                         request.getSession().setAttribute("isAdmin", false);
-                        response.sendRedirect("/myCourses");
+                        response.sendRedirect("/courses/myCourses");
                     }
                 })
                 .permitAll())

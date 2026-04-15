@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
     role VARCHAR(20) NOT NULL
 );
 
-INSERT INTO users (dni, email, first_name, last_name, password, role) 
+INSERT IGNORE INTO users (dni, email, first_name, last_name, password, role) 
 VALUES ('00000000', 'admin@academy.com', 'Admin', 'Admin', 
         '$2a$12$21ksFRPXYUEUvPEAdfeoQeTI8kOfY9w8o3SW.j0OPMTLgWn2au/5a', 
         'ADMIN')         

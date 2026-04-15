@@ -1,7 +1,9 @@
 package com.academy.web.controllers;
 
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,9 +80,25 @@ public class CourseController {
         Model model){
         
         List<UserCourseDTO> students = this.userCourseService.findStudentsByCourseId(id, filtro);
+        model.addAttribute("courseName", this.service.getNameById(id));
         model.addAttribute("courseId", id);
         model.addAttribute("students", students);
         return "studentsCourse";
     }
-    
+
+    @GetMapping("/myCourses")
+    public String getMyCourses(
+            @RequestParam(required = false) String filtro,
+            Model model,
+            Authentication auth){
+        
+        String myUsername = auth.getName();
+        List<Map<String, Object>> myCourses = service.findMyCourses(myUsername, filtro);
+        model.addAttribute("myCourses", myCourses);
+        model.addAttribute("filtro", filtro);
+        System.out.println(myUsername);
+        System.out.println(myCourses);
+
+        return "myCourses";
+    }    
 }

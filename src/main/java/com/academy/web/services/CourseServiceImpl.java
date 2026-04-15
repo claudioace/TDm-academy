@@ -1,6 +1,7 @@
 package com.academy.web.services;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -81,6 +82,23 @@ public class CourseServiceImpl implements CourseService{
         course.setDescription(courseDto.getDescription());
         this.repository.save(course);
         
+    }
+
+    @Override
+    public String getNameById(Long id) {
+        String name = this.repository.getNameById(id).orElse(null);
+        if (name == null) {
+            return "Asignatura";
+        } else {
+            return name;
+        }
+    }
+
+    @Override
+    public List<Map<String, Object>> findMyCourses(String username, String value) {
+        List<Map<String, Object>> myCourses = this.repository.findMyCourses(username, value);
+        return myCourses;
+
     }
     
 }

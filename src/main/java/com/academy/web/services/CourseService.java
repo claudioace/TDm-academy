@@ -1,6 +1,7 @@
 package com.academy.web.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.academy.web.dtos.CourseDTO;
 
@@ -14,5 +15,9 @@ public interface CourseService {
     void deleteCourse(Long id);
 
     CourseDTO findbyName(String name);
+
+    String getNameById(Long id);
+
+    List<Map<String, Object>> findMyCourses(String username, String value);
 
 }

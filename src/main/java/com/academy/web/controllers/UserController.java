@@ -2,7 +2,6 @@ package com.academy.web.controllers;
 
 import java.util.List;
 
-import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

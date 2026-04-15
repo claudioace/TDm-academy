@@ -17,7 +17,7 @@
 <body>
 <div th:replace="~{fragments/navbar :: ${session.isAdmin} ? 'navbar-admin' : 'navbar-student'}"></div>
 
-    <h1>Lista de todos los usuarios</h1>
+    <h1>Lista de todas las asignaturas</h1>
     <form action="/courses" method="get">
         <input type="text" name="filtro" th:value="${filtro}" placeholder="Asignatura" class="input-text"/>
         <button type="submit">Buscar</button>
@@ -57,6 +57,9 @@
             </tr>
         </tbody>
     </table>
+    <button onclick="history.back()" class="btn-back">
+        <i class="fa-solid fa-arrow-left"></i> Regresar
+    </button>
 </body>
 
 </html>

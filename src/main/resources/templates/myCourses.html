@@ -1,11 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asignaturas</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
-    <p>holamundo</p>
+<div th:replace="~{fragments/navbar :: ${session.isAdmin} ? 'navbar-admin' : 'navbar-student'}"></div>
+
+    <h1>Lista de todas mis asignaturas</h1>
+    <form action="/courses/myCourses" method="get">
+        <input type="text" name="filtro" th:value="${filtro}" placeholder="Asignatura" class="input-text"/>
+        <button type="submit">Buscar</button>
+    </form>
+    <a th:href="@{/courses/new}">+ Inscribir Asignatura</a>
+    <table class="table-grid">
+        <thead>
+            <tr>
+                
+                <th>Nombre asignatura</th>
+                <th>Fecha de Inscripcion</th>
+                <th>Promedio de Notas</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${myCourses}">
+                <td th:onclick="'window.location.href=\'' + @{/courses/students/{id}(id=${c.courseId})} + '\''" 
+                    style="cursor: pointer; padding: 1rem;" 
+                    th:text="${c.courseName}"
+                    class="course-cell">
+                </td>
+                <td th:text="${c.date}"></td>
+                <td th:text="${c.avgGrade}"></td>
+                <td>
+                    <form th:action="@{/courses/myCourses/deleteMyCourse}" method="post">
+                        <input type="hidden" name="id" th:value="${c.courseId}" />
+                        <button type="submit"> <i class="fa-solid fa-trash-can"></i> Renunciar</button>
+                    </form>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="history.back()" class="btn-back">
+        <i class="fa-solid fa-arrow-left"></i> Regresar
+    </button>
 </body>
+
 </html>
