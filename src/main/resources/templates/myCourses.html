@@ -35,7 +35,7 @@
         </thead>
         <tbody>
             <tr th:each="c : ${myCourses}">
-                <td th:onclick="'window.location.href=\'' + @{/courses/students/{id}(id=${c.courseId})} + '\''" 
+                <td th:onclick="'window.location.href=\'' + @{/courses/myCourses/{courseId}(courseId=${c.courseId})} + '\''" 
                     style="cursor: pointer; padding: 1rem;" 
                     th:text="${c.courseName}"
                     class="course-cell">

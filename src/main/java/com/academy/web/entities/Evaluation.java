@@ -36,4 +36,36 @@ public class Evaluation {
     public Evaluation() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UserCourse getUserCourseId() {
+        return userCourseId;
+    }
+
+    public void setUserCourseId(UserCourse userCourseId) {
+        this.userCourseId = userCourseId;
+    }
+
+    public Double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Double grade) {
+        this.grade = grade;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
 }

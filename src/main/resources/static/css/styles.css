@@ -48,6 +48,11 @@ body{
     
 }
 
+.table-sm {
+    min-width: 0%;
+    
+}
+
 .table-grid th,
 .table-grid td {
     border: 1px solid #d1d5db;

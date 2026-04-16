@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi asignatura</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<div th:replace="~{fragments/navbar :: ${session.isAdmin} ? 'navbar-admin' : 'navbar-student'}"></div>
+
+    <h1>Lista de evaluaciones <span th:text="${myCourseDetails[0]?.courseName}"></span></h1>
+    <p th:text="${myCourseDetails[0]?.courseDescription}"></p>
+
+
+    <table class="table-grid table-sm">
+        <thead>
+            <tr>
+                <th>Fecha de evaluación</th>
+                <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${myCourseDetails}">
+                <td th:text="${c.date}"></td>
+                <td th:text="${c.grade}"></td>
+
+
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="history.back()" class="btn-back">
+        <i class="fa-solid fa-arrow-left"></i> Regresar
+    </button>
+</body>
+
+</html>

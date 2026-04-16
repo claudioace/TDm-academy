@@ -35,6 +35,21 @@ public interface CourseRepository extends JpaRepository<Course,Long>{
         """)
     List<Map<String, Object>> findMyCourses(@Param("username") String username, @Param("filtro") String filtro);
 
+    @Query("""
+    SELECT new map(
+        c.name as courseName,
+        c.description as courseDescription,
+        e.date as date,
+        e.grade as grade
+    )
+    FROM Course c
+    JOIN UserCourse uc ON c.id = uc.course.id
+    JOIN Evaluation e ON uc.id = e.userCourseId.id
+    JOIN User u ON uc.user.id = u.id
+    WHERE u.email = :username
+    AND c.id = :courseId
+    """)
+    List<Map<String, Object>> findMyCourseDetails(@Param("username") String username, @Param("courseId") Long courseId);
 
 }
     

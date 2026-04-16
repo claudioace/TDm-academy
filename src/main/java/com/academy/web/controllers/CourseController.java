@@ -96,9 +96,24 @@ public class CourseController {
         List<Map<String, Object>> myCourses = service.findMyCourses(myUsername, filtro);
         model.addAttribute("myCourses", myCourses);
         model.addAttribute("filtro", filtro);
-        System.out.println(myUsername);
-        System.out.println(myCourses);
+
 
         return "myCourses";
     }    
+    
+    @GetMapping("/myCourses/{courseId}")
+    public String getCourseDetails(
+        @PathVariable Long courseId,
+        Authentication auth,
+        Model model){
+        
+        String myUsername = auth.getName();
+        List<Map<String, Object>> myCourseDetails = service.findMyCourseDetails(myUsername, courseId);
+        model.addAttribute("myCourseDetails", myCourseDetails);
+
+        System.out.println(myUsername);
+        System.out.println(myCourseDetails);
+        return "myCoursesDetails";
+    }
+
 }

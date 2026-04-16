@@ -20,4 +20,6 @@ public interface CourseService {
 
     List<Map<String, Object>> findMyCourses(String username, String value);
 
+    List<Map<String, Object>> findMyCourseDetails(String username, Long id);
+
 }

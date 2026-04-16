@@ -14,6 +14,8 @@ import com.academy.web.repositories.CourseRepository;
 
 @Service
 public class CourseServiceImpl implements CourseService{
+
+
     private final CourseRepository repository;
 
     public CourseServiceImpl(CourseRepository repository) {
@@ -95,10 +97,15 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public List<Map<String, Object>> findMyCourses(String username, String value) {
-        List<Map<String, Object>> myCourses = this.repository.findMyCourses(username, value);
+    public List<Map<String, Object>> findMyCourses(String userName, String value) {
+        List<Map<String, Object>> myCourses = this.repository.findMyCourses(userName, value);
         return myCourses;
 
+    }
+
+    @Override
+    public List<Map<String, Object>> findMyCourseDetails(String userName, Long courseId) {
+        return repository.findMyCourseDetails(userName, courseId);
     }
     
 }
